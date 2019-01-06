@@ -80,7 +80,7 @@ namespace killer_app
             List<Club> clubs = new List<Club>();
             MySqlCommand cmd = new MySqlCommand("SELECT * FROM clubs;", this.connection);
             DataTable dataTable = new DataTable();
-            this.connection.Open();
+            this.connection.Open();     
             dataTable.Load(cmd.ExecuteReader());
             this.connection.Close();
             foreach (DataRow row in dataTable.Rows)

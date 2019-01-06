@@ -18,7 +18,7 @@ namespace killer_app
             clubs.ForEach(club =>
             {
                 Console.WriteLine("- " + club.Name);
-                //Utils.CreateTeams(club, random.Next(4,8));
+                //Utils.CreateTeams(club, random.Next(4, 8));
             });
 
             clubs.ForEach(club =>
