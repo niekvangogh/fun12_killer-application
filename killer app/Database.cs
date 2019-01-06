@@ -15,7 +15,7 @@ namespace killer_app
         private static Database INSTANCE { get; set; }
 
         private readonly MySqlConnection connection;
-        private string connectionString = "Server=localhost;Uid=root;Database=killerapp;Pwd=root;";
+        private readonly string connectionString = "Server=localhost;Uid=root;Database=killerapp;Pwd=root;";
 
         private Database()
         {
@@ -49,10 +49,21 @@ namespace killer_app
         }
 
 
-        // very inefficient but ok i need to keep consis
+        // very inefficient but ok i need to keep consistent
         public Division GetDivision(Team team)
         {
-            return null;
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM divisions WHERE id = (SELECT division_id FROM teams WHERE id = @team_id);", this.connection);
+            cmd.Parameters.AddWithValue("@team_id", team.Id);
+            DataTable dataTable = new DataTable();
+            this.connection.Open();
+            dataTable.Load(cmd.ExecuteReader());
+            this.connection.Close();
+            if(dataTable.Rows.Count == 0)
+            {
+                return null;
+            }
+            var row = dataTable.Rows[0];
+            return new Division((int)row["id"], (int)row["level"]);
         }
 
         public List<Club> GetClubs()
