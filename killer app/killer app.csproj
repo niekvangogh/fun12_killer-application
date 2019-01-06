@@ -58,6 +58,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database.cs" />
+    <Compile Include="Objects\Club.cs" />
+    <Compile Include="Objects\Division.cs" />
+    <Compile Include="Objects\Pool.cs" />
+    <Compile Include="Objects\Team.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

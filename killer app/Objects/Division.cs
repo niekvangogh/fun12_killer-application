@@ -11,11 +11,12 @@ namespace killer_app.Objects
 
         public Division(int id, int level)
         {
-            this.ID = id;
+            this.Id = id;
             this.Level = level;
         }
 
-        public int ID { get; private set; }
+        public int Id { get; private set; }
+
         public int Level { get; private set; }
     }
 }

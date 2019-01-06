@@ -9,20 +9,25 @@ namespace killer_app.Objects
     public class Team
     {
 
-        public Team(long id, Club club, Division division, long serialNumber)
+        public Team(long id, Club club, long serialNumber)
         {
             this.Id = id;
             this.Club = club;
-            this.Division = division;
             this.SerialNumber = serialNumber;
         }
 
-        public long Id { get; private set; }
+        public int Id { get; private set; }
 
         public Club Club { get; private set; }
 
-        public Division Division { get; private set; }
+        public readonly Division Division
+        {
+            get
+            {
+                return Database.GetInstance().GetDivision(this);
+            }
+        }
 
-        public long SerialNumber { get; private set; }
+        public int SerialNumber { get; private set; }
     }
 }

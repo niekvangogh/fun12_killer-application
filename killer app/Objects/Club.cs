@@ -8,20 +8,28 @@ namespace killer_app.Objects
 {
     public class Club
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
         public string ZipCode { get; set; }
 
         public int StreetNumber { get; set; }
-        
-        public Club(long id, string name, string zipCode, int streetNumber)
+
+        public Club(int id, string name, string zipCode, int streetNumber)
         {
             this.Id = id;
             this.Name = name;
             this.ZipCode = zipCode;
             this.StreetNumber = streetNumber;
+        }
+
+        public readonly List<Team> Teams
+        {
+            get
+            {
+                return Database.GetInstance().GetTeams(this);
+            }
         }
     }
 }
