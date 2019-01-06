@@ -15,11 +15,20 @@ namespace killer_app
         private static Database INSTANCE { get; set; }
 
         private readonly MySqlConnection connection;
-        private readonly string connectionString = "Server=localhost;Uid=root;Database=killerapp;Pwd=root;";
+        private readonly string connectionString;
+
+
 
         private Database()
         {
             INSTANCE = this;
+
+            Console.WriteLine("Please provide your connection string here: ");
+            this.connectionString = Console.ReadLine();
+            if(connectionString == "")
+            {
+                this.connectionString = "Server=localhost;Uid=root;Database=killerapp;Pwd=root;";
+            }
             this.connection = new MySqlConnection(connectionString);
         }
 
@@ -80,5 +89,32 @@ namespace killer_app
             }
             return clubs;
         }
+
+        public void CreateTeam(Club club, Division division, int serialNumber)
+        {
+            MySqlCommand cmd = new MySqlCommand("INSERt INTO teams (club_id, division_id, serial_number) values (@club_id, @division_id, @serial_number)", this.connection);
+            cmd.Parameters.AddWithValue("@club_id", club.Id);
+            cmd.Parameters.AddWithValue("@division_id", division.Id);
+            cmd.Parameters.AddWithValue("@serial_number", serialNumber);
+            this.connection.Open();
+            cmd.ExecuteNonQuery();
+            this.connection.Close();
+        }
+
+        public List<Division> GetDivisions()
+        {
+            List<Division> divisions = new List<Division>();
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM divisions;", this.connection);
+            DataTable dataTable = new DataTable();
+            this.connection.Open();
+            dataTable.Load(cmd.ExecuteReader());
+            this.connection.Close();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                divisions.Add(new Division((int) row["id"], (int) row["level"]));
+            }
+            return divisions;
+        }
+
     }
 }
