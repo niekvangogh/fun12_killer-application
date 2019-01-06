@@ -16,7 +16,16 @@ namespace killer_app
             clubs.ForEach(club =>
             {
                 Console.WriteLine("- " + club.Name);
+            });
 
+            clubs.ForEach(club =>
+            {
+                Console.WriteLine("Teams in club: " + club.Name);
+                club.Teams.ForEach(team =>
+                {
+                    Console.WriteLine(" " + team.Id);
+
+                });
             });
 
             Console.ReadLine();

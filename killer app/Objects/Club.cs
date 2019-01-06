@@ -24,7 +24,7 @@ namespace killer_app.Objects
             this.StreetNumber = streetNumber;
         }
 
-        public readonly List<Team> Teams
+        public List<Team> Teams
         {
             get
             {

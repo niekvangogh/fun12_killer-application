@@ -9,7 +9,7 @@ namespace killer_app.Objects
     public class Team
     {
 
-        public Team(long id, Club club, long serialNumber)
+        public Team(int id, Club club, int serialNumber)
         {
             this.Id = id;
             this.Club = club;
@@ -20,7 +20,7 @@ namespace killer_app.Objects
 
         public Club Club { get; private set; }
 
-        public readonly Division Division
+        public Division Division
         {
             get
             {
